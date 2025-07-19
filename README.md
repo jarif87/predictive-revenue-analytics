@@ -2,6 +2,8 @@
 
 This is a Flask web application that provides real-time predictions for whether a website visitor will make a purchase (`Revenue`) based on input features. It uses a pre-trained Keras model (`my_model.keras`) to predict the binary target (`True` for purchase, `False` for no purchase) and displays results in a modern, user-friendly interface.
 
+![](images/image.png)
+
 ## Features
 - **Real-Time Predictions**: Users input visitor data through a web form, and the app predicts purchase likelihood with probability.
 - **Input Fields**:
