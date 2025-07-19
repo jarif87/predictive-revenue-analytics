@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Revenue Prediction</h1>
+            <p>Enter visitor details to predict purchase likelihood with our AI model.</p>
+        </header>
+
+        <form method="POST" class="prediction-form">
+            <div class="form-group">
+                <label for="administrative">Administrative Pages Visited</label>
+                <input type="text" id="administrative" name="administrative" placeholder="e.g., 0" required>
+            </div>
+            <div class="form-group">
+                <label for="product_related">Product-Related Pages Visited</label>
+                <input type="text" id="product_related" name="product_related" placeholder="e.g., 2" required>
+            </div>
+            <div class="form-group">
+                <label for="product_related_duration">Product-Related Duration (seconds)</label>
+                <input type="text" id="product_related_duration" name="product_related_duration" placeholder="e.g., 64.0" required>
+            </div>
+            <div class="form-group">
+                <label for="bounce_rates">Bounce Rate</label>
+                <input type="text" id="bounce_rates" name="bounce_rates" placeholder="e.g., 0.2" required>
+            </div>
+            <div class="form-group">
+                <label for="exit_rates">Exit Rate</label>
+                <input type="text" id="exit_rates" name="exit_rates" placeholder="e.g., 0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="page_values">Page Values</label>
+                <input type="text" id="page_values" name="page_values" placeholder="e.g., 0.0" required>
+            </div>
+            <div class="form-group">
+                <label for="visitor_type">Visitor Type</label>
+                <select id="visitor_type" name="visitor_type" required>
+                    {% for visitor_type in visitor_types %}
+                    <option value="{{ visitor_type }}">{{ visitor_type.replace('_', ' ') }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Predict Now</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result animate__animated animate__fadeIn">
+            <h2>Prediction Result</h2>
+            <p><strong>Prediction:</strong> {{ prediction }}</p>
+            <p><strong>Probability of Purchase:</strong> {{ probability }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error animate__animated animate__shakeX">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+</body>
+</html>
